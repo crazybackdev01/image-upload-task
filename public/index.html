@@ -3,36 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Express.js File upload</title>
+    <title>Express.js File Upload</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Container */
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 350px;
+      }
+
+      /* Headings */
+      h1 {
+        color: #333;
+        font-size: 24px;
+      }
+
+      h2 {
+        color: #555;
+        font-size: 18px;
+      }
+
+      /* File Input */
+      input[type="file"] {
+        margin: 15px 0;
+        padding: 10px;
+      }
+
+      /* Upload Button */
+      button {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #218838;
+      }
+    </style>
   </head>
   <body>
-    <h1>Express.js File upload</h1>
-    <hr />
-    <h1>Upload from Gallery</h1>
-    <form
-      action="/api/image/upload"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input type="file" name="image" />
-      <button type="submit">Upload Image</button>
-    </form>
-    <hr />
-    <!-- <h1>Upload from Camera</h1>
-    <form
-      id="uploadForm"
-      action="/"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input
-        type="file"
-        name="image"
-        id="fileInput"
-        accept="image/*"
-        capture="environment"
-      />
-      <button type="submit">Upload Image</button> -->
-    </form>
+    <div class="container">
+      <h1>Express.js File Upload</h1>
+      <hr />
+      <h2>Upload from Gallery</h2>
+      <form
+        action="/api/image/upload"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="image" id="fileInput" />
+        <button type="submit">Upload Image</button>
+      </form>
+    </div>
   </body>
 </html>

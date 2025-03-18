@@ -11,7 +11,6 @@ This is a simple **Image Upload & Storage API** built using **Node.js, Express.j
 - **File Upload:** Multer
 - **Storage:** Cloudinary
 - **Image Compression:** Sharp
-<!-- - **API Documentation:** Swagger UI -->
 - **Deployment:** Render
 
 ## 📌 Features
@@ -21,8 +20,7 @@ This is a simple **Image Upload & Storage API** built using **Node.js, Express.j
 - ✅ Delete images
 - ✅ Store image metadata in MongoDB
 - ✅ Image compression before storing
-- ✅ Capture image from camera and upload
-- ✅ Fully documented API with Swagger UI
+- ✅ Upload image from your gallery
 
 ## ⚙️ Setup & Usage
 
@@ -65,16 +63,6 @@ npm run server
 
 The API will run at `http://localhost:5000`
 
-### 5️⃣ Test API Using Swagger UI
-
-Open your browser and go to:
-
-```
-http://localhost:5000/api-docs
-```
-
-This will provide an interactive way to test API endpoints.
-
 ### 6️⃣ Deployment on Render
 
 1. Push code to **GitHub**.
@@ -101,8 +89,8 @@ Deployed: `https://image-upload-task.onrender.com/`
 - **Response:**
   ```json
   {
-    "message": "Image Uploaded Successfully",
-    "url": "https://your-cloudinary-url.com/image-id"
+    "message": "Image uploaded successfully",
+    "URL": "https://res.cloudinary.com/image/upload/id"
   }
   ```
 
@@ -110,12 +98,12 @@ Deployed: `https://image-upload-task.onrender.com/`
 
 - **Endpoint:** `GET /images/:id`
 - **Description:** Retrieves an image by its unique ID.
-- **Response:** Image file
+- **Response:** Redirects the user to the URL of the image given by Cloudinary
 
 ### 3️⃣ **Delete Image**
 
 - **Endpoint:** `DELETE /images/:id`
-- **Description:** Deletes an image from storage.
+- **Description:** Deletes an image from cloudinary and MongoDB database
 - **Response:**
   ```json
   {
@@ -123,16 +111,9 @@ Deployed: `https://image-upload-task.onrender.com/`
   }
   ```
 
-### 4️⃣ **View API Docs**
-
-- **Endpoint:** `GET /api-docs`
-- **Description:** Opens Swagger UI for testing the API.
-
----
-
 ## 📌 Postman Collection
 
-To test the API in **Postman**, import the collection: [Postman Collection Link](#)
+To test the API in **Postman**, import the collection: [https://github.com/crazybackdev01/POSTMAN_COLLECTION_FILE/blob/main/upload_API_postman-collection.json](#)
 
 ---
 
@@ -140,7 +121,7 @@ To test the API in **Postman**, import the collection: [Postman Collection Link]
 
 For any queries, reach out:
 
-- **Email:** your-email@example.com
-- **GitHub:** [your-username](https://github.com/your-username)
+- **Email:** uditnagar419@gmail.com
+- **GitHub:** https://github.com/crazybackdev01
 
 ---
