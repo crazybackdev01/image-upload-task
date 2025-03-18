@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
-import { connectDB } from "./db/connectDb.config.js";
+import { connectDB } from "./config/connectDb.config.js";
 import path from "path";
+import imageRoutes from "./routes/image.routes.js";
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+app.use("/api/image", imageRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
