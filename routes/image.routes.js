@@ -1,12 +1,15 @@
 import { Router } from "express";
 import upload from "../middlewares/multer.middleware.js";
+import {
+  deleteImageController,
+  getImageController,
+  uploadImageController,
+} from "../controllers/image.controllers.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Hello from Image route");
-});
-
 router.post("/upload", upload.single("image"), uploadImageController);
+router.get("/:id", getImageController);
+router.delete("/:id", deleteImageController);
 
 export default router;
