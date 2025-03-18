@@ -45,7 +45,7 @@ Create a `.env` file in the project root and add:
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_uri
+MONGODB_CLOUD_URL=your_mongodb_uri
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
@@ -54,7 +54,13 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ### 4️⃣ Start the Server
 
 ```sh
-node server.js
+node index.js
+```
+
+## OR by
+
+```sh
+npm run server
 ```
 
 The API will run at `http://localhost:5000`
@@ -83,18 +89,19 @@ This will provide an interactive way to test API endpoints.
 ### 🔹 Base URL
 
 Local: `http://localhost:5000`
-Deployed: `https://your-deployed-api.onrender.com`
+Deployed: `https://image-upload-task.onrender.com/`
 
 ### 1️⃣ **Upload Image**
 
-- **Endpoint:** `POST /upload`
-- **Description:** Uploads an image and returns its URL.
+- **Endpoint:** `POST /api/image/upload`
+- **Description:** Uploads an image and returns its Metadata return by Database.
 - **Request:**
   - `multipart/form-data`
   - `image: File (JPG, PNG, JPEG)`
 - **Response:**
   ```json
   {
+    "message": "Image Uploaded Successfully",
     "url": "https://your-cloudinary-url.com/image-id"
   }
   ```

@@ -43,7 +43,7 @@ export const uploadImageController = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Image uploaded successfully", image: uploadedImage });
+      .json({ message: "Image uploaded successfully", URL: uploadedImage.url });
 
     /*
     Demo response = {
