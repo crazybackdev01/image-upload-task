@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,8 @@
   </head>
   <body>
     <h1>Express.js File upload</h1>
+    <hr />
+    <h1>Upload from Gallery</h1>
     <form
       action="/api/image/upload"
       method="post"
@@ -15,5 +17,129 @@
       <input type="file" name="image" />
       <button type="submit">Upload Image</button>
     </form>
+    <hr />
+    <h1>Upload from Camera</h1>
+    <form
+      id="uploadForm"
+      action="/"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input
+        type="file"
+        name="image"
+        id="fileInput"
+        accept="image/*"
+        capture="environment"
+      />
+      <button type="submit">Upload Image</button>
+    </form>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express.js File Upload</title>
+  </head>
+  <body>
+    <h1>Express.js File Upload</h1>
+
+    <!-- Image Upload Form -->
+    <form
+      id="uploadForm"
+      action="/"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input
+        type="file"
+        name="image"
+        id="fileInput"
+        accept="image/*"
+        capture="user"
+      />
+      <br /><br />
+      <button type="submit">Upload Image</button>
+    </form>
+
+    <h2>OR</h2>
+
+    <!-- Button to Open Camera -->
+    <button id="openCamera">Take a Photo</button>
+    <video
+      id="video"
+      width="300"
+      height="200"
+      autoplay
+      style="display: none"
+    ></video>
+    <canvas id="canvas" style="display: none"></canvas>
+    <button id="capture" style="display: none">Capture</button>
+
+    <!-- Hidden Input to Store Captured Image -->
+    <form id="cameraForm" action="" method="post" enctype="multipart/form-data">
+      <input
+        type="file"
+        name="image"
+        id="hiddenFileInput"
+        style="display: none"
+      />
+      <button type="submit" id="uploadCapturedImage" style="display: none">
+        Upload Captured Image
+      </button>
+    </form>
+
+    <script>
+      const openCameraButton = document.getElementById("openCamera");
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const captureButton = document.getElementById("capture");
+      const hiddenFileInput = document.getElementById("hiddenFileInput");
+      const uploadCapturedImageButton = document.getElementById(
+        "uploadCapturedImage"
+      );
+
+      let stream;
+
+      openCameraButton.addEventListener("click", async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          video.srcObject = stream;
+          video.style.display = "block";
+          captureButton.style.display = "block";
+        } catch (error) {
+          alert("Error accessing camera: " + error.message);
+        }
+      });
+
+      captureButton.addEventListener("click", () => {
+        const context = canvas.getContext("2d");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convert canvas to Blob and send to server
+        canvas.toBlob((blob) => {
+          const file = new File([blob], "captured-image.jpg", {
+            type: "image/jpeg",
+          });
+
+          // Create a DataTransfer object and assign the file
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          hiddenFileInput.files = dataTransfer.files;
+
+          uploadCapturedImageButton.style.display = "block"; // Show upload button
+        }, "image/jpeg");
+
+        // Stop the camera
+        stream.getTracks().forEach((track) => track.stop());
+        video.style.display = "none";
+        captureButton.style.display = "none";
+      });
+    </script>
   </body>
 </html>
